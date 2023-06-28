@@ -4,32 +4,43 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.motorcontrol.Talon;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class StabilizedDrivetrain extends SubsystemBase {
 
-  private CANSparkMax leftMotor;
-  private CANSparkMax rightMotor;
+  private TalonFX leftMotor;
+  private TalonFX rightMotor;
+
+  private TalonFXConfiguration config;
 
 
   public AHRS gyro;
 
   public StabilizedDrivetrain(int leftMotorID, int rightMotorID) {
-    rightMotor = new CANSparkMax(rightMotorID, MotorType.kBrushed);
-    leftMotor = new CANSparkMax(leftMotorID, MotorType.kBrushed);
-    leftMotor.setInverted(true);
+    config.supplyCurrLimit.enable = true;
+    config.supplyCurrLimit.triggerThresholdCurrent = 30;
+    config.supplyCurrLimit.currentLimit = 25;
+    config.supplyCurrLimit.triggerThresholdTime = 1.5;
+
+    leftMotor.configAllSettings(config);
+    rightMotor.configAllSettings(config);
+
   }
 
   public void setLeft(double input) {
-    leftMotor.set(input);
+    leftMotor.set(ControlMode.PercentOutput, input);
   }
 
   public void setRight(double input) {
-    rightMotor.set(input);
+    rightMotor.set(ControlMode.PercentOutput, input);
   }
 
   @Override
