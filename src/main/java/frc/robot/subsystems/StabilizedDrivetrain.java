@@ -19,20 +19,29 @@ public class StabilizedDrivetrain extends SubsystemBase {
   private TalonFX leftMotor;
   private TalonFX rightMotor;
 
-  private TalonFXConfiguration config;
+  // private TalonFXConfiguration config;
 
 
   public AHRS gyro;
 
   public StabilizedDrivetrain(int leftMotorID, int rightMotorID) {
-    config.supplyCurrLimit.enable = true;
-    config.supplyCurrLimit.triggerThresholdCurrent = 30;
-    config.supplyCurrLimit.currentLimit = 25;
-    config.supplyCurrLimit.triggerThresholdTime = 1.5;
+    // config = new TalonFXConfiguration();
 
-    leftMotor.configAllSettings(config);
-    rightMotor.configAllSettings(config);
+    leftMotor = new TalonFX(leftMotorID);
+    rightMotor = new TalonFX(rightMotorID);
 
+    // config.supplyCurrLimit.enable = true;
+    // config.supplyCurrLimit.triggerThresholdCurrent = 30;
+    // config.supplyCurrLimit.currentLimit = 25;
+    // config.supplyCurrLimit.triggerThresholdTime = 1.5;
+
+    // leftMotor.configAllSettings(config);
+    // rightMotor.configAllSettings(config);
+
+  }
+  public void set(double input) {
+    leftMotor.set(ControlMode.PercentOutput, input);
+    rightMotor.set(ControlMode.PercentOutput, input);
   }
 
   public void setLeft(double input) {

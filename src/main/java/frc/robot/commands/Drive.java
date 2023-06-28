@@ -19,7 +19,7 @@ public class Drive extends PIDCommand {
   public Drive(StabilizedDrivetrain drivetrain) {
     super(
         // The controller that the command will use
-        new PIDController(0, 0, 0),
+        new PIDController(12, 0, 0.5),
         // This should return the measurement
         () -> drivetrain.gyro.getPitch(),
         // This should return the setpoint (can also be a constant)
