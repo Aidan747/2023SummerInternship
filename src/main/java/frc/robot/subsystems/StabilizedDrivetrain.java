@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -16,8 +17,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class StabilizedDrivetrain extends SubsystemBase {
 
-  private TalonFX leftMotor;
-  private TalonFX rightMotor;
+  private TalonSRX leftMotor;
+  private TalonSRX rightMotor;
 
   // private TalonFXConfiguration config;
 
@@ -27,8 +28,8 @@ public class StabilizedDrivetrain extends SubsystemBase {
   public StabilizedDrivetrain(int leftMotorID, int rightMotorID) {
     // config = new TalonFXConfiguration();
 
-    leftMotor = new TalonFX(leftMotorID);
-    rightMotor = new TalonFX(rightMotorID);
+    leftMotor = new TalonSRX(leftMotorID);
+    rightMotor = new TalonSRX(rightMotorID);
 
     // config.supplyCurrLimit.enable = true;
     // config.supplyCurrLimit.triggerThresholdCurrent = 30;
