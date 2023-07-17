@@ -5,8 +5,8 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.commands.Drive;
-import frc.robot.subsystems.StabilizedDrivetrain;
+import frc.robot.subsystems.Drivetrain;
+
 
 import java.time.Instant;
 
@@ -27,8 +27,8 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
 
-  //fix motor ID later when known
-  private StabilizedDrivetrain drivetrain = new StabilizedDrivetrain(0, 1);
+  
+  private Drivetrain dt = new Drivetrain(Constants.MotorConstants.leftMotorID, Constants.MotorConstants.rightMotorID);
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
@@ -52,9 +52,10 @@ public class RobotContainer {
   
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    drivetrain.setDefaultCommand(new RunCommand(() -> {
-      drivetrain.set(m_driverController.getLeftY());
-    }, drivetrain));
+    dt.setDefaultCommand(new InstantCommand(()-> {
+      dt.enable();
+      dt.setSetpoint(0);
+    }, dt));
       
   }
   /**

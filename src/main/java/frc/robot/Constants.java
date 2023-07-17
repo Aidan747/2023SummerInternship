@@ -18,7 +18,7 @@ public final class Constants {
   }
 
   public static class MotorConstants {
-    public static final int leftMotorID = 10;
-    public static final int rightMotorID = 9;
+    public static final int leftMotorID = 9;
+    public static final int rightMotorID = 10;
   }
 }
